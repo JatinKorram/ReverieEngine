@@ -8,15 +8,15 @@ namespace Reverie
     class GLFWWindow : public Window
     {
         public:
-            GLFWWindow(const WindowSpecification& t_Spec);
+            GLFWWindow(const WindowInfo& t_Info);
             ~GLFWWindow();
 
             virtual void Update() const override;
 
             virtual inline const void* GetNativeWindow() const override { return m_NativeWindow; }
-            virtual inline const WindowSpecification& GetSpecification() const override { return m_Specification; }
+            virtual inline const WindowInfo& GetInfo() const override { return m_Info; }
         private:
+            WindowInfo m_Info;
             GLFWwindow* m_NativeWindow;
-            WindowSpecification m_Specification;
     };
 }

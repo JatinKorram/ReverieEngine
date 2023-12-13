@@ -3,7 +3,7 @@
 
 namespace Reverie
 {
-    struct WindowSpecification
+    struct WindowInfo
     {
         enum WindowType
         {
@@ -16,10 +16,10 @@ namespace Reverie
         uint32_t Width;
         uint32_t Height;
 
-        WindowSpecification(WindowType t_Type = WINDOW_UNKNOWN,
-                            const std::string& t_Title = "Reverie",
-                            uint32_t t_Width = 640,
-                            uint32_t t_Height = 480)
+        WindowInfo(WindowType t_Type = WINDOW_UNKNOWN,
+                   const std::string& t_Title = "Reverie Application",
+                   uint32_t t_Width = 640,
+                   uint32_t t_Height = 480)
             : Type(t_Type), Title(t_Title), Width(t_Width), Height(t_Height)
         {
         }
@@ -28,13 +28,13 @@ namespace Reverie
     class Window
     {
         public:
-            static std::unique_ptr<Window> Create(const WindowSpecification& t_Spec);
+            static std::unique_ptr<Window> Create(const WindowInfo& t_Info);
 
             virtual ~Window() = default;
 
             virtual void Update() const = 0;
 
             virtual inline const void* GetNativeWindow() const = 0;
-            virtual inline const WindowSpecification& GetSpecification() const = 0;
+            virtual inline const WindowInfo& GetInfo() const = 0;
     };
 }

@@ -7,6 +7,8 @@ cmake_minimum_required(VERSION 3.25)
 
 set(CMAKE_CXX_STANDARD 17)
 
+find_package(Vulkan REQUIRED)
+
 set(RV_CORE_SOURCES
         "Engine/Source/Core/Application.cpp"
         "Engine/Source/Core/Application.h"
@@ -16,6 +18,10 @@ set(RV_CORE_SOURCES
 set(RV_DRIVER_GLFW_SOURCES
         "Engine/Source/Drivers/GLFW/GLFWWindow.cpp"
         "Engine/Source/Drivers/GLFW/GLFWWindow.h")
+
+set(RV_DRIVER_VULKAN_SOURCES
+        "Engine/Source/Drivers/Vulkan/VulkanRenderingContext.cpp"
+        "Engine/Source/Drivers/Vulkan/VulkanRenderingContext.h")
 
 set(RV_SERVICE_RENDERING_SOURCES
         "Engine/Source/RenderingService/RenderingContext.cpp"
@@ -27,6 +33,7 @@ set(RV_ENTRY_POINT
 add_executable(Reverie
                     ${RV_CORE_SOURCES}
                     ${RV_DRIVER_GLFW_SOURCES}
+                    ${RV_DRIVER_VULKAN_SOURCES}
                     ${RV_SERVICE_RENDERING_SOURCES}
                     ${RV_ENTRY_POINT})
 
@@ -38,7 +45,9 @@ add_subdirectory("Engine/Source/ThirdParty/glfw")
 
 target_include_directories(Reverie PRIVATE
                                 glfw
-                                "${CMAKE_SOURCE_DIR}/")
+                                "${CMAKE_SOURCE_DIR}/"
+                                ${Vulkan_INCLUDE_DIRECTORIES})
 
 target_link_libraries(Reverie PRIVATE
-                                glfw)
+                                glfw
+                                ${Vulkan_LIBRARIES})

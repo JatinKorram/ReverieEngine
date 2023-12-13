@@ -4,15 +4,15 @@
 
 namespace Reverie
 {
-    GLFWWindow::GLFWWindow(const WindowSpecification& t_Spec)
-        : m_NativeWindow(nullptr), m_Specification(t_Spec)
+    GLFWWindow::GLFWWindow(const WindowInfo& t_Info)
+        : m_NativeWindow(nullptr), m_Info(t_Info)
     {
         if (glfwInit() != GLFW_TRUE)
         {
             return;
         }
 
-        m_NativeWindow = glfwCreateWindow(t_Spec.Width, t_Spec.Height, t_Spec.Title.c_str(), nullptr, nullptr);
+        m_NativeWindow = glfwCreateWindow(t_Info.Width, t_Info.Height, t_Info.Title.c_str(), nullptr, nullptr);
         if (!m_NativeWindow)
         {
             glfwTerminate();

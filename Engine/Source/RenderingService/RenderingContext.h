@@ -3,7 +3,7 @@
 
 namespace Reverie
 {
-    struct RenderingContextSpecification
+    struct RenderingContextInfo
     {
         enum ContextType
         {
@@ -13,7 +13,7 @@ namespace Reverie
 
         ContextType Type;
 
-        RenderingContextSpecification(ContextType t_Type = CONTEXT_UNKNOWN)
+        RenderingContextInfo(ContextType t_Type = CONTEXT_UNKNOWN)
             : Type(t_Type)
         {
         }
@@ -22,10 +22,10 @@ namespace Reverie
     class RenderingContext
     {
         public:
-            static std::unique_ptr<RenderingContext> Create(const RenderingContextSpecification& t_Spec);
+            static std::unique_ptr<RenderingContext> Create(const RenderingContextInfo& t_Info);
 
             virtual ~RenderingContext() = default;
 
-            virtual inline const RenderingContextSpecification& GetSpecification() const = 0;
+            virtual inline const RenderingContextInfo& GetInfo() const = 0;
     };
 }

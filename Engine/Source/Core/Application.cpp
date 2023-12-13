@@ -5,15 +5,16 @@ namespace Reverie
 {
     Application* Application::s_Instance = nullptr;
 
-    Application::Application()
-        : m_IsRunning(false), m_Window(nullptr)
+    Application::Application(const ApplicationInfo& t_Info)
+        : m_Info(t_Info), m_IsRunning(false), m_Window(nullptr)
     {
         s_Instance = this;
 
         {
-            WindowSpecification spec;
-            spec.Type = WindowSpecification::WINDOW_GLFW;
-            m_Window = Window::Create(spec);
+            WindowInfo info;
+            info.Type = WindowInfo::WINDOW_GLFW;
+            info.Title = t_Info.Name;
+            m_Window = Window::Create(info);
         }
     }
 

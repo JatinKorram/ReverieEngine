@@ -3,11 +3,11 @@
 
 namespace Reverie
 {
-    std::unique_ptr<Window> Window::Create(const WindowSpecification& t_Spec)
+    std::unique_ptr<Window> Window::Create(const WindowInfo& t_Info)
     {
-        switch (t_Spec.Type)
+        switch (t_Info.Type)
         {
-            case WindowSpecification::WINDOW_GLFW:  return std::make_unique<GLFWWindow>(t_Spec);
+            case WindowInfo::WINDOW_GLFW:   return std::make_unique<GLFWWindow>(t_Info);
         }
         return nullptr;
     }
